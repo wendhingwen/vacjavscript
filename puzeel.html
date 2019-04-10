@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>puzzle</title>
+    <style>
+        #aqu {
+            /* 最外層的正方形*/
+            width: 480px;
+            height: 480px;
+            border: solid 5px blue;
+            padding: 0px;
+        }
+
+        .cutsqu {
+            width: 118px;
+            height: 118px;
+            border-top: solid 1px white;
+            border-left: solid 1px white;
+            border-right: solid 1px gray;
+            border-bottom: solid 1px gray;
+            float: left;
+            overflow: hidden;
+        }
+
+        .container {
+            width: 1080px;
+            margin: 0 auto;
+            /*只要左右值用auto就置中*/
+        }
+
+        .button4 {
+            width: 100px;
+            height: 30px;
+            background-color: white;
+            color: black;
+            border: 2px solid #e7e7e7;
+        }
+
+        .button4:hover {
+            background-color: #e7e7e7;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div id="aqu"></div>
+        <input type="button" class="button4" value="開始拼圖!" />
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script>
+        $(function () {
+            //將位置轉成座標的換算表
+            var posConv = {};
+            //填入16張圖
+            for (var i = 0; i < 16; i++) {
+                $("#aqu").append("<div class='cutsqu' id='Pic" + i + "'><img src='images/coner.jpg' /a></div>");
+                var row = parseInt(i / 4); //圖的四分之一
+                var col = i % 4;
+        /*******/    $("#Pic" + i + " img").css("margin-left", col * -120 + 1).css("margin-top", row * -120 + 1);
+                //console.log(col);
+                console.log(row);
+                //第i個換成第row列第col行
+                posConv[i] = { row: row, col: col };
+                console.log(posConv[i]);
+            }
+            $("#Pic0 img").remove(); //移除左上角圖片
+
+            function getNearPos(i) {
+                var pool = [];
+                var row = posConv[i].row, col = posConv[i].col;
+                //toCheck用來放入待比對的對象
+                if (row > 0) //上
+                    pool.push((row - 1) * 4 + col);
+                if (row < 4) //下
+                    pool.push((row + 1) * 4 + col);
+                if (col > 0) //左
+                    pool.push(i - 1);
+                if (col < 4) //右
+                    pool.push(i + 1);
+                return pool;
+            }
+
+            //點選動作
+            $(".cutsqu").click(function () {
+                //找尋上下左右有沒有Pic0，有則可以與它交換位置
+                //先找出元素是16個中第幾個?
+                var cells = $("#aqu div");
+                var i = cells.index(this);
+                var toCheck = getNearPos(i);
+                while (toCheck.length > 0) {
+                    var j = toCheck.pop();
+                    if (cells.eq(j).attr("id") == "Pic0") //為空白格，交換位子
+                    {
+                        //排序，必要時對調，讓i < j
+                        if (i > j) { var k = j; j = i; i = k; }
+                        var ahead = cells.eq(i);
+                        var behind = cells.eq(j);
+                        var behindPrev = behind.prev();
+                        //左右對調
+                        if (Math.abs(i - j) == 1)
+                            behind.after(ahead);
+                        else //上下對調
+                        {
+                            ahead.after(behind);
+                            behindPrev.after(ahead);
+                        }
+                        break;
+                    }
+                }
+            });
+            $("input:button").click(function () {
+                for (var i = 0; i < 500; i++) {
+                    var cells = $("#aqu div");
+                    //找出空格所在位置，並取得其相鄰圖塊
+                    var toMove = getNearPos(cells.index($("#Pic0")[0]));
+                    cells.eq(toMove[ //由空格的相鄰圖塊擇一挪動
+                        parseInt(Math.random() * toMove.length)
+                    ]).click();
+                    
+                }
+            });
+        });
+
+    </script>
+</body>
+
+</html>

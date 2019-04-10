@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>memory</title>
+</head>
+
+<body>
+    <div class="container col-md-6 col-md-offset-2 mt-5">
+        <div class="container">
+            <h2 class="text-center">記憶遊戲</h2>
+            <table class="table table-bordered">
+                <tbody>
+                    <tr>
+                        <th scope="row">
+                            <button type="button" class="btn btn-light btn-block" onclick="which=0;play()">
+                                <img src="images/q.jpg" alt="..." style="width: 50px;height:50px;" >
+                            </button>
+                        </th>
+                        <td>
+                            <button type="button" class="btn btn-light btn-block" onclick="which=1;play()"><img src="images/q.jpg"
+                                    class="rounded mx-auto d-block" alt="..." style="width: 50px;height:50px;">
+                            </button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-light btn-block" onclick="which=2;play()"><img src="images/q.jpg"
+                                    class="rounded mx-auto d-block" alt="..." style="width: 50px;height:50px;" >
+                            </button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-light btn-block" onclick="which=3;play()"><img src="images/q.jpg"
+                                    class="rounded mx-auto d-block" alt="..." style="width: 50px;height:50px;" >
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">
+                            <button type="button" class="btn btn-light btn-block" onclick="which=4;play()"><img src="images/q.jpg"
+                                    class="rounded mx-auto d-block" alt="..." style="width: 50px;height:50px;" >
+                            </button>
+                        </th>
+                        <td>
+                            <button type="button" class="btn btn-light btn-block"onclick="which=5;play()"><img src="images/q.jpg"
+                                    class="rounded mx-auto d-block" alt="..." style="width: 50px;height:50px;" >
+                            </button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-light btn-block" onclick="which=6;play()"><img src="images/q.jpg"
+                                    class="rounded mx-auto d-block" alt="..." style="width: 50px;height:50px;" >
+                            </button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-light btn-block"  onclick="which=7;play()"><img src="images/q.jpg"
+                                    class="rounded mx-auto d-block" alt="..." style="width: 50px;height:50px;">
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">
+                            <button type="button" class="btn btn-light btn-block" onclick="which=8;play()"><img src="images/q.jpg"
+                                    class="rounded mx-auto d-block" alt="..." style="width: 50px;height:50px;" >
+                            </button>
+                        </th>
+                        <td>
+                            <button type="button" class="btn btn-light btn-block" onclick="which=9;play()"><img src="images/q.jpg"
+                                    class="rounded mx-auto d-block" alt="..." style="width: 50px;height:50px;" >
+                            </button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-light btn-block" onclick="which=10;play()"><img src="images/q.jpg"
+                                    class="rounded mx-auto d-block" alt="..." style="width: 50px;height:50px;" >
+                            </button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-light btn-block"onclick="which=11;play()">
+                                <img src="images/q.jpg" class="rounded mx-auto d-block" alt="..."
+                                    style="width: 50px;height:50px;" >
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">
+                            <button type="button" class="btn btn-light btn-block" onclick="which=12;play()">
+                                <img src="images/q.jpg" class="rounded mx-auto d-block" alt="..."
+                                    style="width: 50px;height:50px;" >
+                            </button>
+                        </th>
+                        <td>
+                            <button type="button" class="btn btn-light btn-block"onclick="which=13;play()"><img src="images/q.jpg"
+                                    class="rounded mx-auto d-block" alt="..." style="width: 50px;height:50px;" >
+                            </button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-light btn-block" onclick="which=14;play()"><img src="images/q.jpg"
+                                    class="rounded mx-auto d-block" alt="..." style="width: 50px;height:50px;" >
+                            </button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-light btn-block" onclick="which=15;play()"><img src="images/q.jpg"
+                                    class="rounded mx-auto d-block" alt="..." style="width: 50px;height:50px;" >
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="container  col-md-5">
+                <button type="button" class="btn btn-info " id="change" onclick="initial()">開始遊戲</button>
+                
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script>
+        var rndnum = new Array(16);
+        var imgfile = new Array("images/1.png", "images/2.png", "images/3.png", "images/4.png", "images/5.png", "images/6.png", "images/7.png", "images/8.png"); //圖片陣列
+        var record = new Array(-1, -1, -1, -1, -1, -1, -1, -1,-1, -1, -1, -1, -1, -1, -1,-1);
+        var cnt = 0, which = -1, playtime = 0, ok = -1;
+        var start = 0, firstp = -1, secondp = -1;
+        function getmanyrnd() {  //亂數存陣列
+            for (var i = 0; i <= 15 ; i++) {
+                rndnum[i] = i % 8;
+               // console.log(rndnum[i]);
+            }
+
+           var tmp;
+            for (var i = 0; i <= 15; i++) {  //亂數排位子
+               var r1 = Math.floor(Math.random() * 16);
+                tmp = rndnum[i];
+                rndnum[i] = rndnum[r1];
+                rndnum[r1] = tmp;
+              //  console.log(tmp);
+                //console.log(rndnum[r1]);
+            }
+            // delayshow();
+        }
+
+        function delayshow() { //看牌位子
+            cnt++;
+            if (cnt <= 4)
+                TimerID = setTimeout("delayshow()", 2000);
+            else {
+                for (var i = 0; i <=15; i++) {
+                    document.images[i].src = "images/q.jpg";
+                }
+                start = 1; //開始遊戲
+            }
+        }
+
+        function initial() {
+            which = -1; playtime = 0; ok = -1;
+            firstp = -1; secondp = -1;
+            getmanyrnd();
+            for (var i = 0; i <= 15; i++) {
+                record[i] = -1;
+                document.images[i].src = imgfile[rndnum[i]];
+            }
+            //  document.all.winner.innerHTML = "<font color=red>&nbsp;進行中!</font>"
+            //  document.all.whoplay.innerHTML = "<font color=blue>&nbsp;0次!</font>"
+            cnt = 0;
+            delayshow();
+        }
+        function play(){
+            if ((start == 1) && (record[which] != 1)) 
+            {
+            if (firstp == -1) 
+            {
+                firstp = which;
+            }
+            else if (secondp == -1) 
+            {
+                secondp = which;
+            }
+            document.images[which].src = imgfile[rndnum[which]];
+
+            if ((firstp >= 0) && (secondp >= 0) && (rndnum[firstp] == rndnum[secondp])) {
+                record[firstp] = 1; record[secondp] = 1; 
+                document.images[secondp].src = "images/b.jpg";
+                document.images[firstp].src = "images/b.jpg";
+                firstp = -1; secondp = -1;
+            }
+            else if  ((firstp >= 0) && (secondp >= 0) && rndnum[firstp] != rndnum[secondp]) {
+                //document.images[firstp].src = imgfile[rndnum[firstp]];
+                document.images[secondp].src = imgfile[rndnum[secondp]]; 
+                document.images[firstp].src = "images/q.jpg";
+                document.images[secondp].src = "images/q.jpg"; 
+                firstp = -1; secondp = -1;
+            }
+            console.log(firstp);
+            ok = 1;
+            for (var i = 0; i <= 15; i++){
+                 if (record[i] != 1) {
+                     ok = -1;
+                 }
+            }
+               
+            if (ok == 1) { alert("成功!!"); start = -1 }
+
+            playtime++;
+            var msg = (ok == 1) ? "成功!!" : "&nbsp;進行中";
+            document.all.winner.innerHTML = "<font color=red>" + msg + "</font>"
+            document.all.whoplay.innerHTML = "<font color=blue>" + playtime + "次</font>"
+        } 
+
+    } 
+     
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>lottery</title>
+    <style>
+        .dummy {
+            height: 200px;
+            width: 50px;
+        }
+
+        .block {
+            position: absolute;
+            top: 5px;
+            right: -10px;
+            bottom: 5px;
+            left: 10px;
+            background: #222;
+            /* margin: 0 auto;*/
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <a>最小號碼:</a>
+                <input type="text" class="form-control" id="input_a">
+            </div>
+            <div class="col">
+                <a>最大號碼:</a>
+                <input type="text" class="form-control" id="input_b">
+            </div>
+        </div>
+        <div class="col-md-5 m-auto">
+            <a>已經抽過:</a>
+        </div>
+
+        <div class="row">
+            <div class="col-md-5 m-auto" id="block">
+                <div class="row ">
+                    <div class="dummy "></div>
+                    <div class="block " id="scroll"><a class="text-white text-center align-middle"> 7</a></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5 m-auto">
+            <button type="button" class="btn btn-secondary btn-lg btn-block">抽!</button>
+        </div>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+        
+    <script>
+        $("button").click(function () {
+            var input_a = document.getElementById("input_a").value;  //最小編號的值
+            var input_b = document.getElementById("input_b").value;  //最大編號的值
+            var i_a = parseInt(input_a);
+            var i_b = parseInt(input_b);
+            $("#right").click(function () {
+                $(".block").animate({ "left": "+=50px" }, "slow");
+            });
+
+            $("#left").click(function () {
+                $(".block").animate({ "left": "-=50px" }, "slow");
+            });
+
+            for (var i = i_a; i <= i_b; i++) {
+                $("#block").append("<div class='block' id='Scroll'>"+ i + "</div>");
+                console.log(i);
+            }
+
+        });
+
+
+
+
+    </script>
+</body>
+
+</html>
