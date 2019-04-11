@@ -10,8 +10,8 @@
     <title>lottery</title>
     <style>
         .dummy {
-            height: 200px;
-            width: 50px;
+            height: 100px;
+            width: 20px;
         }
 
         .block {
@@ -27,32 +27,36 @@
 </head>
 
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <a>最小號碼:</a>
-                <input type="text" class="form-control" id="input_a">
-            </div>
-            <div class="col">
-                <a>最大號碼:</a>
-                <input type="text" class="form-control" id="input_b">
-            </div>
-        </div>
-        <div class="col-md-5 m-auto">
-            <a>已經抽過:</a>
-        </div>
+    <div class="container col-md-8">
 
-        <div class="row">
-            <div class="col-md-5 m-auto" id="block">
-                <div class="row ">
-                    <div class="dummy "></div>
-                    <div class="block " id="scroll"><a class="text-white text-center align-middle"> 7</a></div>
-                </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelect01">最小號碼</label>
+            </div>
+            <input id="min" class="form-control" type="number" value="0">
+
+            <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelect01">最大號碼</label>
+            </div>
+            <input id="max" class="form-control" type="number" value="0">
+        </div>
+    </div>
+
+    <div class="col-md-5 m-auto">
+        <a>已經抽過:</a>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 m-auto" id="block">
+            <div class="row ">
+                <div class="dummy "></div>
+                <div class="block " id="scroll"><a class="text-white text-center align-middle"> 7</a></div>
             </div>
         </div>
-        <div class="col-md-5 m-auto">
-            <button type="button" class="btn btn-secondary btn-lg btn-block">抽!</button>
-        </div>
+    </div>
+    <div class="col-md-5 m-auto">
+        <button type="button" class="btn btn-secondary btn-lg btn-block">抽!</button>
+    </div>
     </div>
 
 
@@ -66,31 +70,31 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
 
-        
+
     <script>
-        $("button").click(function () {
-            var input_a = document.getElementById("input_a").value;  //最小編號的值
-            var input_b = document.getElementById("input_b").value;  //最大編號的值
-            var i_a = parseInt(input_a);
-            var i_b = parseInt(input_b);
-            $("#right").click(function () {
-                $(".block").animate({ "left": "+=50px" }, "slow");
+        $(document).ready(function () {
+            $("button").click(function () {
+                var min = $("#min").val();
+                var i_min = parseInt(min);
+                // console.log(i_min);
+                var max = $("#max").val();
+                var i_max = parseInt(max)
+                var array = [];
+                var index_arr = [];
+
+                // console.log(rand);
+                for (var i = i_min; i <= i_max; i++) {
+                    array.push(i);
+                    i = Math.floor(Math.random() * (array.length) ); 
+                   // var index = array.charAt(i);
+                    if (array.indexOf(array[i]) != -1) {
+                         array.slice(array[i]);
+                    }
+                 
+                }
+                console.log(array);
             });
-
-            $("#left").click(function () {
-                $(".block").animate({ "left": "-=50px" }, "slow");
-            });
-
-            for (var i = i_a; i <= i_b; i++) {
-                $("#block").append("<div class='block' id='Scroll'>"+ i + "</div>");
-                console.log(i);
-            }
-
         });
-
-
-
-
     </script>
 </body>
 
