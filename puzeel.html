@@ -55,14 +55,14 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <script>
         $(function () {
-            //將位置轉成座標的換算表
+            
             var posConv = {};
             //填入16張圖
             for (var i = 0; i < 16; i++) {
                 $("#aqu").append("<div class='cutsqu' id='Pic" + i + "'><img src='images/coner.jpg' /a></div>");
                 var row = parseInt(i / 4); //圖的四分之一
                 var col = i % 4;
-        /*******/    $("#Pic" + i + " img").css("margin-left", col * -120 + 1).css("margin-top", row * -120 + 1);
+               $("#Pic" + i + " img").css("margin-left", col * -120 + 1).css("margin-top", row * -120 + 1);
                 //console.log(col);
                 console.log(row);
                 //第i個換成第row列第col行
@@ -71,7 +71,7 @@
             }
             $("#Pic0 img").remove(); //移除左上角圖片
 
-            function getNearPos(i) {
+            function getNearPos(i) {  
                 var pool = [];
                 var row = posConv[i].row, col = posConv[i].col;
                 //toCheck用來放入待比對的對象

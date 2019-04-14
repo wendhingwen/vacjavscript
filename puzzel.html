@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>puzzel</title>
+    <style>
+        #aqu {
+            /* 最外層的正方形*/
+            width: 480px;
+            height: 480px;
+            border: solid 5px blue;
+            padding: 0px;
+        }
+
+        .cutsqu {
+            width: 118px;
+            height: 118px;
+            border-top: solid 1px white;
+            border-left: solid 1px white;
+            border-right: solid 1px gray;
+            border-bottom: solid 1px gray;
+            float: left;
+            overflow: hidden;
+        }
+
+        .container {
+            width: 1080px;
+            margin: 0 auto;
+            /*只要左右值用auto就置中*/
+        }
+
+        .button4 {
+            width: 100px;
+            height: 30px;
+            background-color: white;
+            color: black;
+            border: 2px solid #e7e7e7;
+        }
+
+        .button4:hover {
+            background-color: #e7e7e7;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div id="aqu"></div>
+        <input type="button" class="button4" value="開始拼圖!" />
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script>
+    $(document).ready(function () {
+        var photo = [];
+
+        for(var i=0;i<16;i++){
+            $("#aqu").append("<div class='cutsqu' id='Pic" + i +"'><img src='images/coner.jpg' /a></div>")
+            var row = parseInt(i / 4); //分四行
+           // console.log(row);
+            var col = i % 4;  //一列裡面有四個
+            console.log(col);
+            $("#Pic" + i + " img").css("margin-left", col * -120 + 1).css("margin-top", row * -120 + 1);  //因為外圍設480所以除4每格的col和row要*-120原點在左上角
+            photo[i] = {row : row , col:col}; //把row和col放到陣列中
+        }
+        $("#Pic0 img").remove(); //移除左上角圖片
+
+        function getPos(i){
+            var 
+        }
+    });
+    
+    
+    
+    
+    </script>
+</body>
+
+</html>

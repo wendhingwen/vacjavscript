@@ -9,57 +9,56 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>lottery</title>
     <style>
-        .dummy {
-            height: 100px;
-            width: 20px;
-        }
-
-        .block {
-            position: absolute;
-            top: 5px;
-            right: -10px;
-            bottom: 5px;
-            left: 10px;
-            background: #222;
-            /* margin: 0 auto;*/
+        .rectangle {
+            background-color: #8D9FB3;
+            width: 200px;
+            height: 200px;
+            line-height: 200px;
+            font-size: 50px;
         }
     </style>
 </head>
 
 <body>
-    <div class="container col-md-8">
+    <center>
+        <div class="container">
+            <div class="d-flex justify-content-center ">
+                <div class="row align-items-center">
+                    <div class="col-5"><span>
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="inputGroupSelect01">最小號碼</label>
+                                <input id="min" class="form-control" type="number" value="0">
+                            </div>
+                        </span></div>
+                    <div class="col-5">
+                        <span>
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="inputGroupSelect01">最大號碼</label>
+                                <input id="max" class="form-control" type="number" value="0">
+                        </span>
+                    </div>
 
-        <div class="input-group mb-3">
+                </div>
+                <div class="col"><span> <button type="button" class="btn btn-info mt-3" id="check">確認</button></span>
+                </div>
+            </div>
             <div class="input-group-prepend">
-                <label class="input-group-text" for="inputGroupSelect01">最小號碼</label>
-            </div>
-            <input id="min" class="form-control" type="number" value="0">
 
+            </div>
+            &nbsp; &nbsp;
             <div class="input-group-prepend">
-                <label class="input-group-text" for="inputGroupSelect01">最大號碼</label>
+
             </div>
-            <input id="max" class="form-control" type="number" value="0">
+
         </div>
-    </div>
 
-    <div class="col-md-5 m-auto">
-        <a>已經抽過:</a>
-    </div>
+        <a>已經抽出:<a id="number"></a></a>
+        <div class="rectangle  mt-3 align-middle" id="text">
 
-    <div class="row">
-        <div class="col-md-4 m-auto" id="block">
-            <div class="row ">
-                <div class="dummy "></div>
-                <div class="block " id="scroll"><a class="text-white text-center align-middle"> 7</a></div>
-            </div>
         </div>
-    </div>
-    <div class="col-md-5 m-auto">
-        <button type="button" class="btn btn-secondary btn-lg btn-block">抽!</button>
-    </div>
-    </div>
-
-
+        <button type="button" class="btn btn-info mt-3" id="pick">抽</button>
+        </div>
+    </center>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
@@ -72,29 +71,54 @@
 
 
     <script>
-        $(document).ready(function () {
-            $("button").click(function () {
-                var min = $("#min").val();
-                var i_min = parseInt(min);
-                // console.log(i_min);
-                var max = $("#max").val();
-                var i_max = parseInt(max)
-                var array = [];
-                var index_arr = [];
+        var array = [];
+        function start() {
+            min = $("#min").val();
+            i_min = parseInt(min);
+            // console.log(i_min);
+            max = $("#max").val();
+            i_max = parseInt(max);
+            // console.log(rand);
+            for (var i = i_min; i <= i_max; i++) {  //範圍是最小到最大
+                array.push(i); //將所有值放在陣列
+            }
 
-                // console.log(rand);
-                for (var i = i_min; i <= i_max; i++) {
-                    array.push(i);
-                    i = Math.floor(Math.random() * (array.length) ); 
-                   // var index = array.charAt(i);
-                    if (array.indexOf(array[i]) != -1) {
-                         array.slice(array[i]);
-                    }
-                 
-                }
+        }
+        function check() {
+            if (array.length > 0) {
+                console.log("array.length=" + array.length);
+
+                var r = Math.floor(Math.random() * array.length);
+                var n = array[r];
+
+                console.log(r);
+                console.log(n);
+
                 console.log(array);
-            });
-        });
+
+                if (array.length == 1) {
+                    document.getElementById("number").innerHTML += n + "";
+                    document.getElementById("text").innerHTML = n + "";
+                    alert("數字已抽完");
+
+                } else {
+                    document.getElementById("number").innerHTML += n + ", ";
+                    document.getElementById("text").innerHTML = n + "";
+                }
+            }
+            array.splice(r, 1);
+
+
+        }
+        $("#check").on("click", function () {
+            start();
+            document.getElementById("pick").disabled = false;
+        })
+
+        $("#pick").on("click", function () {
+            check();
+        })
+
     </script>
 </body>
 
